@@ -92,6 +92,7 @@ CYPHER_MINER_TMP_PATH="/tmp/opt/cypher/miner/"
 CYPHER_MINER_SYMLINK_PATH="/usr/local/bin/"
 CYPHER_MINER_EXECUTABLE="miner"
 
+USER=root
 
 # Check if we are running on a real terminal and find the rows and columns
 # If there is no real terminal, we will default to 80x24
