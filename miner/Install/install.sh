@@ -150,11 +150,11 @@ install_dependencies() {
     else
       printf "  %b libc6-dev\n" "${CROSS}"
       printf "  %b Installing libc6-dev\n" "${INFO}"
-      sudo apt-get update
+      apt-get update
       if [ "${IS_NON_INTERACTIVE}" = true ]; then
-        sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install libc6-dev
+        DEBIAN_FRONTEND=noninteractive apt-get -yq install libc6-dev
       else
-        sudo apt-get install libc6-dev
+        apt-get install libc6-dev
       fi
     fi
     if dpkg -s libsodium-dev &> /dev/null; then
@@ -162,11 +162,11 @@ install_dependencies() {
     else
       printf "  %b libsodium-dev\n" "${CROSS}"
       printf "  %b Installing libsodium-dev\n" "${INFO}"
-      sudo apt-get update
+      apt-get update
       if [ "${IS_NON_INTERACTIVE}" = true ]; then
-        sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install libsodium-dev
+        DEBIAN_FRONTEND=noninteractive apt-get -yq install libsodium-dev
       else
-        sudo apt-get install libsodium-dev
+        apt-get install libsodium-dev
       fi
     fi
     if dpkg -s libssl-dev &> /dev/null; then
@@ -174,11 +174,11 @@ install_dependencies() {
     else
       printf "  %b libssl-dev\n" "${CROSS}"
       printf "  %b Installing libssl-dev\n" "${INFO}"
-      sudo apt-get update
+      apt-get update
       if [ "${IS_NON_INTERACTIVE}" = true ]; then
-        sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install libssl-dev
+        DEBIAN_FRONTEND=noninteractive apt-get -yq install libssl-dev
       else
-        sudo apt-get install libssl-dev
+        apt-get install libssl-dev
       fi
     fi      
   fi
@@ -189,7 +189,7 @@ install_dependencies() {
     else
       printf "  %b glibc-devel\n" "${CROSS}"
       printf "  %b Installing glibc-devel\n" "${INFO}"
-      sudo yum update
+      yum update
       yum install glibc-devel
     fi    
   fi
@@ -267,12 +267,12 @@ install_archive() {
   printf "%b  %b Unpacked archive to %s\n" "${OVER}" "${TICK}" "${CYPHER_MINER_TMP_PATH}"
 
   printf "  %b Installing to %s" "${INFO}" "${CYPHER_MINER_OPT_PATH}"
-  sudo mkdir -p "${CYPHER_MINER_OPT_PATH}"
-  sudo cp -r "${CYPHER_MINER_TMP_PATH}"* "${CYPHER_MINER_OPT_PATH}"
-  sudo chmod -R 755 "${CYPHER_MINER_OPT_PATH}"
-  sudo chown -R $USER "${CYPHER_MINER_OPT_PATH}"
+  mkdir -p "${CYPHER_MINER_OPT_PATH}"
+  cp -r "${CYPHER_MINER_TMP_PATH}"* "${CYPHER_MINER_OPT_PATH}"
+  chmod -R 755 "${CYPHER_MINER_OPT_PATH}"
+  chown -R $USER "${CYPHER_MINER_OPT_PATH}"
   if [ ! -f "${CYPHER_MINER_SYMLINK_PATH}${CYPHER_MINER_EXECUTABLE}" ]; then
-    sudo ln -s "${CYPHER_MINER_OPT_PATH}${CYPHER_MINER_EXECUTABLE}" "${CYPHER_MINER_SYMLINK_PATH}"
+    ln -s "${CYPHER_MINER_OPT_PATH}${CYPHER_MINER_EXECUTABLE}" "${CYPHER_MINER_SYMLINK_PATH}"
   fi
 
   printf "%b  %b Installed to %s\n" "${OVER}" "${TICK}" "${CYPHER_MINER_OPT_PATH}"   
@@ -284,7 +284,7 @@ cleanup() {
   printf "\n"
   printf "  %b Cleaning up files" "${INFO}"
   rm -rf "${DOWNLOAD_PATH}"
-  sudo rm -rf "${CYPHER_MINER_TMP_PATH}"
+  rm -rf "${CYPHER_MINER_TMP_PATH}"
   printf "%b  %b Cleaned up files\n" "${OVER}" "${TICK}"
 }
 
@@ -297,8 +297,8 @@ finish() {
 if [ "${IS_UNINSTALL}" = true ]; then
   printf "  %b Uninstalling\n\n" "${INFO}"
 
-  sudo rm -rf "${CYPHER_MINER_OPT_PATH}"
-  sudo rm -f "${CYPHER_MINER_SYMLINK_PATH}${CYPHER_MINER_EXECUTABLE}"
+  rm -rf "${CYPHER_MINER_OPT_PATH}"
+  rm -f "${CYPHER_MINER_SYMLINK_PATH}${CYPHER_MINER_EXECUTABLE}"
 
   printf "\n\n  %b Uninstall successful\n\n" "${DONE}"
 
